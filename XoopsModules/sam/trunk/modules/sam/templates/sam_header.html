@@ -1,0 +1,63 @@
+<!-- BEGIN:PAGE -->
+<div id="page">
+	
+		<!-- BEGIN:LOGO -->
+	<div id="logo">
+		<a href="./">
+			<img src="<{$xoops_url}>/<{$xoConfig.station_logo}>"/>
+			<{$xoConfig.station_name}>
+		</a>
+		<{if (isset($currentSong) && $currentSong.listeners) > 0}>
+			<div id="listener_count">Users Listening: <{$currentSong.listeners}></div>
+		<{/if}>
+	</div>
+	<!-- END:LOGO -->
+	
+	
+	<!-- BEGIN:ERROR_MESSAGE -->
+	<{if (isset($err_message) && is_array($err_message) && count($err_message)>0)}>
+	<div id="err_message" class="error">
+		<{foreach from=$err_message item=errmsg}> 
+			<div><{$errmsg}></div>
+		<{/foreach}>
+	</div>
+	<{/if}>
+	<!-- END:ERROR_MESSAGE -->
+	
+	
+	<!-- BEGIN:NAVIGATION -->
+	<div id="navigation">
+		<dl>
+			<dt>Menu</dt>
+			<dd><a href="javascript:player(<{$xoConfig.station_id}>)" title="Click to Listen"><img src="<{$xoops_url}>/modules/sam/images/menu/speaker.png" /> Listen</a></dd>
+			<dd><a href="<{$xoops_url}>/modules/sam/playing.php" title="Now playing"><img src="<{$xoops_url}>/modules/sam/images/menu/play.png" /> Now playing</a></dd>
+			<dd><a href="<{$xoops_url}>/modules/sam/playlist.php" title="Playlist &amp; Requests"><img src="<{$xoops_url}>/modules/sam/images/menu/tb-file-list.png" /> Playlist<{if $xoConfig.allow_requests}> &amp; Requests<{/if}></a></dd>
+			<{if (!empty($xoConfig.station_email) && !is_null($xoConfig.station_email)) }>
+			<dd><a href="mailto:<{$xoConfig.station_email}>" title="Email us!"><img src="<{$xoops_url}>/modules/sam/images/menu/email.png" /> Email us!</a></dd>
+			<{/if}>
+		</dl>
+	</div>
+	<!-- END:NAVIGATION -->
+	
+	<!-- BEGIN:TOP_REQUESTS -->
+	<{if $xoConfig.allow_requests && $xoConfig.show_top_requests && is_array($topRequestedSongs) && count($topRequestedSongs) > 0}>
+	<div id="top_requests">
+		<dl>
+			<dt>Top Requested</dt>
+			<{assign item=counter value=1}>;
+			<{foreach from=$topRequestedSongs item=topRequestedSong}>
+				<dd>
+					<a href="javascript:songinfo(<{$topRequestedSong.ID}>, '<{$xoops_url}>', 'sam')" title="<{$topRequestedSong.artist_title}>">
+						<{$counter}> <{$topRequestedSong.title}>
+						<{if (!empty($topRequestedSong.artist))}><br />&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;<{$topRequestedSong.artist}><{/if}>
+						(<{$topRequestedSong.count}>)
+					</a>
+				</dd>
+				<{assign item=counter value=$counter+1}>
+			<{/foreach}>
+		</dl>
+	</div>
+	<{/if}>
+	<!-- END:TOP_REQUESTS -->
+	
+

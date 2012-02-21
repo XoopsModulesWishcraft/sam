@@ -1,0 +1,13 @@
+========================================
+ 2012/02/22 12:40:00 Version 1.02 STABLE
+========================================
+- Smarty Template Bugs Fixed
+- Pagination Fixed
+- Imported Zend XML Routines Cleaned
+
+
+========================================
+ 2012/02/21 22:54:00 Version 1.01 STABLE
+========================================
+- Developed for XOOPS 2.5 to replace SAM Standalone Package with XOOPS Content management
+ 
