@@ -1,0 +1,37 @@
+<!-- BEGIN:PARTER LINKS -->
+<div id="partner-links">
+
+	<!--- SpacialAudioSolutions_Link_BEGIN -->
+	<a href="http://audiorealm.com" title="<{$smarty.const._BL_SAM_PARTNER_AUDIOREALMNETWORK}>" target="_blank"> <img src="http://media.audiorealm.com/images/AudioRealmBadge.png" title="<{$smarty.const._BL_SAM_PARTNER_AUDIOREALMNETWORK}>" border="0" /> </a>
+	<!--- SpacialAudioSolutions_Link_END -->
+
+	<br />
+	<br />
+
+	<!--- SpacialAudioSolutions_Link_BEGIN -->
+	<a href="http://spacial.com/sam-broadcaster" title="<{$smarty.const._BL_SAM_PARTNER_POWEREDBYSAM}>" target="_blank"> <img src="http://media.spacial.com/images/affiliate-badge-sam-broadcaster-20x60.jpg" title="<{$smarty.const._BL_SAM_PARTNER_POWEREDBYSAM}>" border="0" /> </a>
+	<!--- SpacialAudioSolutions_Link_END -->
+
+	<br />
+	<br />
+
+	<!--- Station Share BEGIN -->
+	<a id="shareButton">
+		<img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="<{$smarty.const._BL_SAM_PARTNER_BOOKMARKORSHARE}>" title="<{$smarty.const._BL_SAM_PARTNER_BOOKMARKORSHARE}>" style="border:0"/>
+	</a>
+
+	<script type="text/javascript">
+	//<![CDATA[
+		function DrawAddThisButton()
+		{
+			var addthis_share = {'url': 'http://audiorealm.com/play/<{$block.station_id}>/<{$block.station_name}>', 'title': '<{$block.station_name}>', 'templates': {'twitter': 'Listen to {{title}} on AudioRealm ({{url}})'}};
+			var addthis_config = {'data_track_clickback': true};
+			addthis.button('#shareButton', addthis_config, addthis_share);
+		}
+		DrawAddThisButton();
+	//]]>
+	</script>
+	<!--- Station Share END -->
+
+</div>
+<!-- END:PARTER LINKS -->

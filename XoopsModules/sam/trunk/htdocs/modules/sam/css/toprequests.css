@@ -1,0 +1,75 @@
+/************************************************************************
+ * TOP REQUESTS STYLES:
+ *
+ *
+ ************************************************************************/
+#top_requests {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	width:90%;
+}
+
+#top_requests dl {
+	background: #6699CC;
+	margin: 0px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 10px;
+	width: 100%;
+}
+
+#top_requests dl dt {
+	border-bottom: 1px solid white;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 10px;
+}
+
+#top_requests dl dd {
+	font-size: 12px;
+	background-color: #4477AA;
+	background-repeat: repeat;
+	background-position: 0px 0px;
+	background-attachment: scroll;
+
+	border-bottom: 1px solid white;
+	color: white;
+	font-size: 1em;
+	margin: 0px;
+	padding: 0px;
+}
+
+#top_requests dl dd a,
+#top_requests dl dd a:visited {
+	background-color: #4477AA;
+	background-repeat: no-repeat;
+	background-position: 10px 10px;
+	background-attachment: scroll;
+
+	color: white;
+	display: block;
+	text-decoration: none;
+	width: 90%;
+
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+}
+
+#top_requests dl dd a:hover {
+	background-color: #6699CC;
+	background-repeat: no-repeat;
+	background-position: 11px 10px;
+	background-attachment: scroll;
+	color: #99CCFF;
+}
+
+#top_requests dl dd img {
+	vertical-align: middle;
+	border: 0px;
+}

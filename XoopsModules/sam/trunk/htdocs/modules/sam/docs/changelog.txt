@@ -1,0 +1,40 @@
+========================================
+ 2012/02/23 2:54:00 Version 1.03 STABLE
+========================================
+- added css/currentsong.css Current Song Block CSS (wishcraft)
+- added css/navigation.css Navigation Block CSS (wishcraft)
+- added css/partners.css Partners Block CSS (wishcraft)
+- added css/toprequests.css Top Requests Block CSS (wishcraft)
+- added block/sam_block_currentsong.php Current Song Block PHP Routines (wishcraft)
+- added block/sam_block_navigation.php Navigation Block PHP Routines (wishcraft)
+- added block/sam_block_toprequests.php Top Requests Block PHP Routines (wishcraft)
+- added templates/block/sam_block_currentsong.html Current Song Block Smarty Template (wishcraft)
+- added templates/block/sam_block_navigation.html Navigation Block Smarty Template (wishcraft)
+- added templates/block/sam_block_toprequests.html Top Requests Block Smarty Template (wishcraft)
+- changed language/english/blocks.php added langauge for new blocks and old blocks (wishcraft)
+- changed language/english/main.php added langauge for smarty templates (wishcraft)
+- changed block/sam_block_partnerlinks.php Changed $_Mod to $GLOBALS['samModule'] (wishcraft)
+- changed templates/block/sam_block_partnerlinks.html Removed Language and put in language file [see blocks.php] (wishcraft)
+- changed templates/sam_error.html Removed Language and put in language file [see main.php] (wishcraft)
+- changed templates/sam_footer.html Removed Language and put in language file [see main.php] (wishcraft)
+- changed templates/sam_header.html Removed Side blocks & Language [see main.php] & fixed assign (wishcraft)
+- changed templates/sam_playing.html Removed Language and put in language file [see main.php] & fixed assign (wishcraft)
+- changed templates/sam_playlist.html Removed Language and put in language file [see main.php] & fixed assign (wishcraft)
+- changed templates/sam_request_error.html Removed Language and put in language file [see main.php] (wishcraft)
+- changed templates/sam_request.html Removed Language and put in language file [see main.php] (wishcraft)
+- changed templates/sam_songinfo.html Removed Language and put in language file [see main.php] (wishcraft)
+- changed templates/sam_songcheck.html Removed Language and put in language file [see main.php] (wishcraft)
+
+========================================
+ 2012/02/22 12:40:00 Version 1.02 STABLE
+========================================
+- Smarty Template Bugs Fixed
+- Pagination Fixed
+- Imported Zend XML Routines Cleaned
+
+
+========================================
+ 2012/02/21 22:54:00 Version 1.01 STABLE
+========================================
+- Developed for XOOPS 2.5 to replace SAM Standalone Package with XOOPS Content management
+ 

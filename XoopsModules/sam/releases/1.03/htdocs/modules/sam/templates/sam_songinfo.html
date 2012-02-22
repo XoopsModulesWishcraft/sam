@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title><{$xoConfig.station_name}> - <{$smarty.const._MS_SAM_SONGINFO_TRACKINFORMATION}></title>
+		<link rel="shortcut icon" href="<{$xoops_url}>/favicon.ico" />
+		<!-- Styling of the samPHPweb pages -->
+		<link rel="stylesheet" type="text/css" href="<{$xoops_url}><{$smarty.const._MI_SAM_CSS_STYLE}>" />
+		<!-- Songinfo Page specific styles -->
+		<link rel="stylesheet" type="text/css" href="<{$xoops_url}><{$smarty.const._MI_SAM_CSS_SONGINFO}>" />
+
+		<!-- Common Javascript functions -->
+		<script type="text/javascript" src="<{$xoops_url}><{$smarty.const._MI_SAM_JS_COMMON}>"></script>
+		<{if ($xoConfig.allow_requests)}>
+		<!-- Javascript for request and songinfo actions -->
+		<script type="text/javascript">
+			/**
+			 * Open a popup window to send a song request to SAM
+			 */
+			function request(songID) {
+				<{if ($xoConfig.private_requests)}>
+					requestPrivate(songID, '<{$xoops_url}>', 'sam');
+				<{else}>
+					var samhost = "<{$xoConfig.sam_host}>";
+					var samport = "<{$xoConfig.sam_port}>";
+					requestAudioRealm(songID, samhost, samport);
+				<{/if}>
+			}
+		</script>
+		<{/if}>
+		<!-- JQuery library to do cool Javascript stuff -->
+		<script type="text/javascript" src="<{$xoops_url}><{$smarty.const._MI_SAM_JS_JQUERY}>"></script>
+		<!-- JQuery plugin for Cross-Browser compatible rounding of corners -->
+		<script type="text/javascript" src="<{$xoops_url}><{$smarty.const._MI_SAM_JS_JQUERY_CORNERS}>"></script>
+	</head>
+
+	<body>
+
+		<!-- BEGIN:PAGE -->
+		<div id="page">
+			<div id="pictureAndLinks">
+				<{if ($xoConfig.show_pictures && !empty($song.picture)) }>  <a href="<{$song.buycd}>" target="_blank"><img class="picture" id="picture" onload="showPicture(this, <{$xoConfig.show_pictures}>)" src="<{$song.picture}>" alt="<{$smarty.const._MS_SAM_SONGINFO_BUYCD}>" border=0 /></a><{/if}>
+			</div>
+			<h1><{$smarty.const._MS_SAM_SONGINFO_TRACKINFORMATION}></h1>
+
+			<dl>
+				<dt><{$smarty.const._MS_SAM_SONGINFO_TITLE}></dt>
+				<dd><{$song.title}></dd>
+				<dt><{$smarty.const._MS_SAM_SONGINFO_ARTIST}></dt>
+				<dd><a href="<{$song.website}>" target="_blank" title="<{$smarty.const._MS_SAM_SONGINFO_MOREARTISTINFO}>"><{$song.artist}></a></dd>
+				<dt><{$smarty.const._MS_SAM_SONGINFO_ALBUM}></dt>
+				<dd><a href="<{$song.buycd}>" target="_blank" title="<{$smarty.const._MS_SAM_SONGINFO_MOREALBUMINFO}>"><{$song.album}></a></dd>
+				<dt><{$smarty.const._MS_SAM_SONGINFO_DURATION}></dt>
+				<dd><{$song.duration}></dd>
+				<dt><{$smarty.const._MS_SAM_SONGINFO_YEAR}></dt>
+				<dd><{$song.albumyear}></dd>
+				<dt><{$smarty.const._MS_SAM_SONGINFO_GENRE}></dt>
+				<dd><{$song.genre}></dd>
+				<dt><{$smarty.const._MS_SAM_SONGINFO_LINKS}></dt>
+				<dd>
+				  <a href="<{$song.website}>" target="_blank"><img class="request" src="<{$xoops_url}>/modules/sam/images/home.png" alt="<{$smarty.const._MS_SAM_SONGINFO_MOREARTISTDETAILS}>" title="<{$smarty.const._MS_SAM_SONGINFO_MOREARTISTDETAILS}>" border="0" /></a>
+				  <a href="<{$song.buycd}>" target="_blank"><img class="buy" src="<{$xoops_url}>/modules/sam/images/buy.png" alt="<{$smarty.const._MS_SAM_SONGINFO_BUYTHISCDORTRACK}>" title="<{$smarty.const._MS_SAM_SONGINFO_BUYTHISCDORTRACK}>" border="0" /></a>
+				  <{if ($xoConfig.allow_requests)}>
+				  	<a href="javascript:request(<{$song.ID}>);"><img class="request" src="<{$xoops_url}>/modules/sam/images/request.png" alt="<{$smarty.const._MS_SAM_SONGINFO_REQUESTTHISTRACK}>Request this track now!" title="<{$smarty.const._MS_SAM_SONGINFO_REQUESTTHISTRACK}>" border="0" /></a>
+				  <{/if}>
+				</dd>
+				<{if (!empty($song.lyrics))}>
+					<dt><{$smarty.const._MS_SAM_SONGINFO_LYRICS}></dt>
+					<dd class="broad"><pre><{$song.lyrics}></pre></dd>
+				<{/if}>
+				<{if (!empty($song.info))}>
+					<dt><{$smarty.const._MS_SAM_SONGINFO_INFORMATION}></dt>
+					<dd class="broad"><{$song.info}></dd>
+				<{/if}>
+			</dl>
+		</div>
+		
+		<div class="spacer"></div>
+		
+		<{includeq file='db:sam_footer.html'}>
+		<!-- END:PAGE -->
+
+	</body>
+</html>
+

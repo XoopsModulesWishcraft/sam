@@ -1,0 +1,46 @@
+<!-- BEGIN:CURRENT SONG -->
+<div id="current-song">
+	<dl>
+		<{if $block.currentSong.listeners}>
+		<dt><{$smarty.const._BL_SAM_CURRENT_LISTENERS}></dt>
+		<dd><{$block.currentSong.listeners}></dd>
+		<{/if}>
+		<{if $block.currentSong.title}>
+		<dt><{$smarty.const._BL_SAM_CURRENT_SONGTITLE}></dt>
+		<dd><{$block.currentSong.title}></dd>
+		<{/if}>
+		<{if $block.currentSong.artist}>
+		<dt><{$smarty.const._BL_SAM_CURRENT_ARTIST}></dt>
+		<dd><a href="<{$block.currentSong.website}>" target="_blank" title="<{$smarty.const._BL_SAM_CURRENT_CLICKFORMOREARTISTINFO}>"><{$block.currentSong.artist}></a></dd>
+		<{/if}>
+		<{if $block.currentSong.album}>
+		<dt><{$smarty.const._BL_SAM_CURRENT_ALBUM}></dt>
+		<dd><a href="<{$block.currentSong.buycd}>" target="_blank" title="<{$smarty.const._BL_SAM_CURRENT_CLICKFORMOREARTISTINFO}>"><{$block.currentSong.album}></a></dd>
+		<{/if}>
+		<{if $block.currentSong.duration}>
+		<dt><{$smarty.const._BL_SAM_CURRENT_DURATION}></dt>
+		<dd><{$block.currentSong.duration}></dd>
+		<{/if}>
+		<{if $block.currentSong.albumyear}>
+		<dt><{$smarty.const._BL_SAM_CURRENT_YEAR}></dt>
+		<dd><{$block.currentSong.albumyear}></dd>
+		<{/if}>
+		<{if $block.currentSong.genre}>
+		<dt><{$smarty.const._BL_SAM_CURRENT_GENRE}></dt>
+		<dd><{$block.currentSong.genre}></dd>
+		<{/if}>
+	</dl>
+</div>
+<!-- BEGIN:END SONG -->
+<!-- JQuery to round corners some of the HTML items on the page -->
+<script type="text/javascript">
+//<![CDATA[
+// Make sure the DOM is ready
+$(document).ready(function() {
+
+	// Rounds the Navigation Menu Corners
+	$('#current-song dl').corner();
+
+});
+//]]>
+</script>

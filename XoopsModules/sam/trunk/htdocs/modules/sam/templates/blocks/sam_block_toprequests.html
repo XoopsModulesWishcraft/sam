@@ -1,0 +1,32 @@
+<!-- BEGIN:TOP_REQUESTS -->
+<{if $block.allow_requests && $block.show_top_requests && is_array($block.topRequestedSongs) && count($block.topRequestedSongs) > 0}>
+<div id="top_requests">
+	<dl>
+		<{assign var=topcounter value=1}>
+		<{foreach from=$block.topRequestedSongs item=topRequestedSong}>
+			<dd>
+				<a href="javascript:songinfo(<{$topRequestedSong.ID}>, '<{$xoops_url}>', 'sam')" title="<{$topRequestedSong.artist_title}>">
+					<{$topcounter}> <{$topRequestedSong.title}>
+					<{if (!empty($topRequestedSong.artist))}><br />&nbsp;&nbsp;&nbsp;&nbsp;<{$smarty.const._BL_SAM_TOP_BY}>&nbsp;<{$topRequestedSong.artist}><{/if}>
+					(<{$topRequestedSong.count}>)
+				</a>
+			</dd>
+			<{assign var=topcounter value=$topcounter+1}>
+		<{/foreach}>
+	</dl>
+</div>
+
+<!-- END:TOP_REQUESTS -->
+<!-- JQuery to round corners some of the HTML items on the page -->
+<script type="text/javascript">
+//<![CDATA[
+// Make sure the DOM is ready
+$(document).ready(function() {
+
+	// Rounds the Navigation Menu Corners
+	$('#top_requests dl').corner();
+
+});
+//]]>
+</script>
+<{/if}>

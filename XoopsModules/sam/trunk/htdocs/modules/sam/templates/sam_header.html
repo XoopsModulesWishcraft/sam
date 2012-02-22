@@ -1,0 +1,28 @@
+<!-- BEGIN:PAGE -->
+<div id="page">
+	
+		<!-- BEGIN:LOGO -->
+	<div id="logo">
+		<a href="./">
+			<img src="<{$xoops_url}>/<{$xoConfig.station_logo}>"/>
+			<{$xoConfig.station_name}>
+		</a>
+		<{if (isset($currentSong) && $currentSong.listeners) > 0}>
+			<div id="listener_count"><{$smarty.const._MS_SAM_HEADER_USERSLISTENING}><{$currentSong.listeners}></div>
+		<{/if}>
+	</div>
+	<!-- END:LOGO -->
+	
+	
+	<!-- BEGIN:ERROR_MESSAGE -->
+	<{if (isset($err_message) && is_array($err_message) && count($err_message)>0)}>
+	<div id="err_message" class="error">
+		<{foreach from=$err_message item=errmsg}> 
+			<div><{$errmsg}></div>
+		<{/foreach}>
+	</div>
+	<{/if}>
+	<!-- END:ERROR_MESSAGE -->
+
+	
+
