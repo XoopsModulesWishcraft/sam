@@ -1,0 +1,32 @@
+<!-- BEGIN:NAVIGATION -->
+<div id="navigation-menu">
+	<dl>
+		<{if $block.allow_player}>
+		<dd><a href="javascript:player(<{$block.station_id}>)" title="<{$smarty.const._BL_SAM_NAV_CLICKTOLISTEN}>"><img src="<{$xoops_url}>/modules/sam/images/menu/speaker.png" /><{$smarty.const._BL_SAM_NAV_LISTEN}></a></dd>
+		<{/if}>
+		<{if $block.allow_nowplaying}>
+		<dd><a href="<{$xoops_url}>/modules/sam/playing.php" title="<{$smarty.const._BL_SAM_NAV_NOWPLAYING}>"><img src="<{$xoops_url}>/modules/sam/images/menu/play.png" /><{$smarty.const._BL_SAM_NAV_NOWPLAYING}></a></dd>
+		<{/if}>
+		<{if $block.allow_playlistrequest}>
+		<dd><a href="<{$xoops_url}>/modules/sam/playlist.php" title="<{$smarty.const._BL_SAM_NAV_PLAYLISTANDREQUESTS}>"><img src="<{$xoops_url}>/modules/sam/images/menu/tb-file-list.png" /><{$smarty.const._BL_SAM_NAV_PLAYLIST}><{if $xoConfig.allow_requests}> <{$smarty.const._BL_SAM_NAV_ANDREQUESTS}><{/if}></a></dd>
+		<{/if}>
+		<{if $block.allow_contactus}>
+		<{if (!empty($block.station_email) && !is_null($block.station_email)) }>
+		<dd><a href="mailto:<{$block.station_email}>" title="<{$smarty.const._BL_SAM_NAV_EMAILUS}>"><img src="<{$xoops_url}>/modules/sam/images/menu/email.png" /><{$smarty.const._BL_SAM_NAV_EMAILUS}></a></dd>
+		<{/if}>
+		<{/if}>
+	</dl>
+</div>
+<!-- END:NAVIGATION -->
+<!-- JQuery to round corners some of the HTML items on the page -->
+<script type="text/javascript">
+//<![CDATA[
+// Make sure the DOM is ready
+$(document).ready(function() {
+
+	// Rounds the Navigation Menu Corners
+	$('#navigation-menu dl').corner();
+
+});
+//]]>
+</script>

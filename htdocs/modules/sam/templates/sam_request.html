@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title><{$smarty.const._MS_SAM_REQUEST_REQUESTSUCCESSFUL}></title>
+		<link rel="shortcut icon" href="<{$xoops_url}>/favicon.ico" />
+		<!-- Styling of the samPHPweb pages -->
+		<link rel="stylesheet" type="text/css" href="<{$xoops_url}><{$smarty.const._MI_SAM_CSS_STYLE}>" />
+		<!-- Request specific styling -->
+		<link rel="stylesheet" type="text/css" href="<{$xoops_url}><{$smarty.const._MI_SAM_CSS_REQUEST}>" />
+		<!-- Common Javascript functions -->
+		<script type="text/javascript" src="<{$xoops_url}><{$smarty.const._MI_SAM_JS_COMMON}>"></script>
+		<!-- JQuery library to do cool Javascript stuff -->
+		<script type="text/javascript" src="<{$xoops_url}><{$smarty.const._MI_SAM_JS_JQUERY}>"></script>
+		<!-- JQuery plugin for Cross-Browser compatible rounding of corners -->
+		<script type="text/javascript" src="<{$xoops_url}><{$smarty.const._MI_SAM_JS_JQUERY_CORNERS}>"></script>
+	</head>
+
+	<body>
+
+		<!-- BEGIN:PAGE -->
+		<div id="page">
+			<{if ($song.isDedication)}>
+			<h2 class="success"><{$smarty.const._MS_SAM_REQUEST_REQUESTSUCCESSFULANDSHOULDPLAY}></h2>
+			<{/if}>
+			<div id="pictureAndLinks">
+				<{if ($xoConfig.show_pictures && !empty($song.picture))}>  <a href="<{$song.buycd}>" target="_blank"><img class="picture" onload="showPicture(this, true)" src="<{$song.picture}>" alt="<{$smarty.const._MS_SAM_REQUEST_BUYCD}>" border=0 /></a><{/if}>
+			</div>
+			<h1><{$smarty.const._MS_SAM_REQUEST_TRACKINFORMATION}></h1>
+
+			<dl>
+				<dt><{$smarty.const._MS_SAM_REQUEST_TITLE}></dt>
+				<dd><{$song.title}></dd>
+				<{if (!empty($song.artist))}>
+					<dt><{$smarty.const._MS_SAM_REQUEST_ARTIST}></dt>
+					<dd><{$song.artist}></dd>
+				<{/if}>
+				<{if (!empty($song.album))}>
+					<dt><{$smarty.const._MS_SAM_REQUEST_ALBUM}></dt>
+					<dd><{$song.album}></dd>
+				<{/if}>
+				<dt><{$smarty.const._MS_SAM_REQUEST_LINKS}></dt>
+				<dd>
+				  <a href="<{$song.website}>" target="_blank"><img class="request" src="<{$xoops_url}>/modules/sam/images/home.png" alt="<{$smarty.const._MS_SAM_REQUEST_MOREARTISTDETAILS}>" title="<{$smarty.const._MS_SAM_REQUEST_MOREARTISTDETAILS}>" border="0" /></a>
+				  <a href="<{$song.buycd}>" target="_blank"><img class="buy" src="<{$xoops_url}>/modules/sam/images/buy.png" alt="<{$smarty.const._MS_SAM_REQUEST_BUYTHISCDORTRACK}>" title="<{$smarty.const._MS_SAM_REQUEST_BUYTHISCDORTRACK}>" border="0" /></a>
+				</dd>
+
+				<dt><{$smarty.const._MS_SAM_REQUEST_DEDICATION}></dt>
+				<dd class="broad">
+					<{if ($song.isDedication)}>
+					<div id="dedicationMessage">"<{$smarty.request.rmessage}>"</div>
+					<div id="dedicationName"><{$smarty.const._MS_SAM_REQUEST_DEDICATIONBY}> <{$smarty.request.rname}></div>
+					<{else}>
+						<form method="post">
+						<input type="hidden" name="requestID" value="<{$requestID}>"/>
+						<input type="hidden" name="songID" value="<{$songID}>"/>
+						<{$smarty.const._MS_SAM_REQUEST_YOURNAME}><br/>
+							<input type="text" name="rname" size="30"/><br/>
+							<{$smarty.const._MS_SAM_REQUEST_YOURDEDICATIONMESSAGE}><br/>
+							<textarea rows="4" name="rmessage" cols="24"></textarea><br/>
+							<input type="submit" value="<{$smarty.const._MS_SAM_REQUEST_DEDICATEIT}>" name="B1" />
+						</form>
+						<br />
+						<br />
+						<{$smarty.const._MS_SAM_REQUEST_NOTE}>
+					<{/if}>
+				</dd>
+			</dl>
+		</div>
+		<div class="spacer"></div>
+		<{includeq file='db:sam_footer.html'}>
+		<!-- END:PAGE -->
+	</body>
+</html>

@@ -1,0 +1,174 @@
+<{includeq file='db:sam_header.html'}>
+	<!-- BEGIN:SEARCH -->
+	<div id="search">
+	<form method="GET" action="<{$xoops_url}>/modules/sam/playlist.php" name="searchParameters">
+	<{$smarty.const._MS_SAM_PLAYLIST_SEARCH}> <input type="text" value="<{$smarty.get.search}>" name="search" maxlen="20" />
+	<input type="submit" value="Go" name="B1" />
+	<{$smarty.const._MS_SAM_PLAYLIST_DISPLAY}> <select name='limit' onChange="document.forms.searchParameters.submit();">
+				<option value='10'<{if $limit eq 10}> selected<{/if}>>10</option>
+				<option value='15'<{if $limit eq 15}> selected<{/if}>>15</option>
+				<option value='20'<{if $limit eq 20}> selected<{/if}>>20</option>
+				<option value='25'<{if $limit eq 25}> selected<{/if}>>25</option>
+				<option value='50'<{if $limit eq 50}> selected<{/if}>>50</option>
+				<option value='75'<{if $limit eq 75}> selected<{/if}>>75</option>
+				<option value='100'<{if $limit eq 100}> selected<{/if}>>100</option>
+			</select> <{$smarty.const._MS_SAM_PLAYLIST_RESULTS}>
+		<hr/>
+
+		<{$smarty.const._MS_SAM_PLAYLIST_SEARCHBYARTIST}><br />
+
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<input type="submit" name="character" class="characterButton" value="All" onclick="document.forms.searchParameters.search.value=''"/>
+					</td>
+					<td>
+						<input <{if "0 - 9" eq $character}> "id='activeCharacter'" <{else}> ""<{/if}> type="submit" name="character" class="characterButton" value='0 - 9'/>
+					</td>
+					<{php}>
+					for($charVal = ord('A');$charVal <= ord('Z'); $charVal++) {
+						$c = chr($charVal);
+						echo "<td>";
+						echo "<input ".($this->_tpl['character'] == $c? "id='activeCharacter'" : "")." type='submit' name='character' class='characterButton' value='$c' onclick='document.forms.searchParameters.search.value=\"\"' />";
+						echo "</td>";
+					}
+					<{/php}>
+				</tr>
+			</tbody>
+		</table>
+
+
+		</form>
+
+		<br />
+	</div>
+	<!-- END:SEARCH -->
+
+
+	<!-- BEGIN:PLAYLIST -->
+	<div id="playlist">
+		<div id="playlist_wrapper">
+			<table  cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th colspan="3" align="left">
+							<{$smarty.const._MS_SAM_PLAYLIST_PLAYLISTRESULTS}>
+						</th>
+						<th class="links" align="center">
+							<{$smarty.const._MS_SAM_PLAYLIST_LINKS}>
+						</th>
+						<th align="left">
+							<{$smarty.const._MS_SAM_PLAYLIST_ALBUM}>
+						</th>
+						<th align="right">
+							<{$smarty.const._MS_SAM_PLAYLIST_TIME}>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td colspan="6" id="td-playlist-paging">
+					<{if (is_array($playlistSongs) && (count($playlistSongs)>0)) }>
+						<{if ($start > 0) }><{$prevlnk}><{/if}>
+						&nbsp; [ <{$smarty.const._MS_SAM_PLAYLIST_SHOWING}> <{$first}> <{$smarty.const._MS_SAM_PLAYLIST_TO}> <{$last}> <{$smarty.const._MS_SAM_PLAYLIST_OF}> <{$count}> ] &nbsp;
+						<{if (($start+$limit) < $count) }> <{$nextlnk}> <{/if}>
+					<{/if}>
+					</td>
+				</tr>
+				<{if (is_array($playlistSongs) || (count($playlistSongs)>0)) }>
+					<{foreach from=$playlistSongs key=key item=playlistSong}>
+					<tr>
+						<td>
+							<{$key+1}>
+						</td>
+						<td>
+							<{if (!empty($playlistSong.picture))}>
+							<a href="<{$playlistSong.buycd}>" target="_blank">
+								<img id="rpPicture<{$key}>" style="display: none;" onload="showPicture(this, <{$xoConfig.show_pictures}>)" width="60" height="60" src="<{$playlistSong.picture}>" alt="<{$smarty.const._MS_SAM_PLAYLIST_BUYCD}>" title="<{$smarty.const._MS_SAM_PLAYLIST_VIEWCDINFO}>" />
+							</a>
+							<{/if}>
+						</td>
+						<td>
+							<{$playlistSong.artist_title}>
+							<{if ($playlistSong.isRequested)}>
+							<{$smarty.const._MS_SAM_PLAYLIST_REQUESTED}>
+							<{/if}>
+						</td>
+						<td align="center">
+							<{if $xoConfig.allow_requests}>
+							<a href="javascript:request(<{$playlistSong.ID}>);">
+								<img src="<{$xoops_url}>/modules/sam/images/request.png" alt="<{$smarty.const._MS_SAM_PLAYLIST_REQUESTTHISTRACK}>" title="<{$smarty.const._MS_SAM_PLAYLIST_REQUESTTHISTRACK}>"/>
+							</a>
+							<{/if}>
+							<a href="<{$playlistSong.buycd}>" target="_blank">
+								<img src="<{$xoops_url}>/modules/sam/images/buy.png" alt="<{$smarty.const._MS_SAM_PLAYLIST_BUYCDORTRACK}>" title="<{$smarty.const._MS_SAM_PLAYLIST_BUYCDORTRACK}>"/>
+							</a>
+							<a href="<{$playlistSong.website}>" target="_blank">
+								<img src="<{$xoops_url}>/modules/sam/images/home.png" alt="<{$smarty.const._MS_SAM_PLAYLIST_ARTISTHOMEPAGE}>" title="<{$smarty.const._MS_SAM_PLAYLIST_ARTISTHOMEPAGE}>" />
+							</a>
+							<a href="javascript:songinfo(<{$playlistSong.ID}>, '<{$xoops_url}>', 'sam')">
+								<img src="<{$xoops_url}>/modules/sam/images/info.png" alt="<{$smarty.const._MS_SAM_PLAYLIST_TRACKINFORMATION}>" title="<{$smarty.const._MS_SAM_PLAYLIST_TRACKINFORMATION}>" />
+							</a>
+						</td>
+						<td>
+							<{$playlistSong.album}>
+						</td>
+						<td align="right">
+							<{$playlistSong.duration}>
+						</td>
+					</tr>
+				<{/foreach}>
+				<{/if}>
+					<tr>
+						<td colspan="6" id="td-playlist-paging">
+						<{if (!is_array($playlistSongs) || (count($playlistSongs)==0)) }>
+						 	<{$smarty.const._MS_SAM_PLAYLIST_NOMATCHFOUND}>
+						<{else}>
+							<{if ($start > 0) }><{$prevlnk}><{/if}>
+							&nbsp; [ <{$smarty.const._MS_SAM_PLAYLIST_SHOWING}> <{$first}> <{$smarty.const._MS_SAM_PLAYLIST_TO}> <{$last}> <{$smarty.const._MS_SAM_PLAYLIST_OF}> <{$count}> ] &nbsp;
+							<{if (($start+$limit) < $count)}><{$nextlnk}><{/if}>
+						<{/if}>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- END:PLAYLIST -->
+
+
+<{includeq file='db:sam_footer.html'}>
+<{$smarty.const._MI_SAM_SOFTWARESPONSOR}>
+<!-- END:PAGE -->
+
+<!-- JQuery to round corners some of the HTML items on the page -->
+<script type="text/javascript">
+//<![CDATA[
+// Make sure the DOM is ready
+$(document).ready(function() {
+	// Rounding of corners (Cross-browser compatible)
+	// See http://jquery.malsup.com/corner/ for different Styles.
+
+	// Rounds the page corners
+	$('#page').corner();
+
+	// Rounds the Coming Up Corners
+	$('#coming-up dl').corner();
+
+	// Round the Dedication Corners
+	$('#dedication dl').corner('tl tr').corner();
+
+	// Round the Top Request Corners
+	$('#top_requests dl').corner();
+
+	// Rounds the Playlist and search boxes
+	$('#playlist_wrapper, #search').corner();
+	// Style odd and even rows in Playlist Table (Cross-browser compatible)
+	$('#playlist table tbody tr:nth-child(odd)').addClass('playlist_odd');
+	$('#playlist table tbody tr:nth-child(even)').addClass('playlist_even');
+
+});
+//]]>
+
+</script>

@@ -1,0 +1,98 @@
+/************************************************************************
+ * navigation-menu STYLES:
+ * #navigation-menu:
+ *   Positions the navigation-menu menu
+ *
+ * #navigation-menu dl:
+ *   background: navigation-menu area background color
+ *   width: Width of the navigation-menu Menu
+ *
+ * #navigation-menu dl dt:
+ *   border-bottom: White line below the Header Text in the menu
+ *   color: Header Text Color
+ *   font-size: Header Text Size
+ *
+ * #navigation-menu dl dd:
+ *   background-color: Background colors of items in the menu
+ *   color: Menu text color
+ *   font-size: Header Text Size
+ *   border-bottom: White line below the Text in the menu
+ *
+ * #navigation-menu dl dd a:
+ * Styling on hover
+ *
+ *
+ ************************************************************************/
+#navigation-menu {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	margin-left: 2px;
+	margin-right: 10px;	
+	text-align: left;
+	width:90%;
+}
+
+#navigation-menu dl {
+	text-align: left;
+	background: #6699CC;
+	margin: 0px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 10px;
+	width: 100%;
+}
+
+#navigation-menu dl dt {
+	text-align: left;
+	border-bottom: 1px solid white;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px;
+}
+
+#navigation-menu dl dd {
+	text-align: left;
+	vertical-align: middle;
+	font-size: 12px;
+	background-color: #4477AA;
+	border-bottom: 1px solid white;
+	color: white;
+	padding-bottom: 10px;
+	margin: 0px;
+}
+
+#navigation-menu dl dd a,
+#navigation-menu dl dd a:visited {
+	text-align: left;
+	background-color: #4477AA;
+	background-repeat: no-repeat;
+	background-position: 10px 10px;
+	background-attachment: scroll;
+	height: 20px;
+	color: white;
+	display: block;
+	text-decoration: none;
+	width: 90%;
+
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+}
+
+#navigation-menu dl dd a:hover {
+	text-align: left;
+	background-color: #225588;
+	background-repeat: no-repeat;
+	background-position: 11px 10px;
+	background-attachment: scroll;
+	color: #99CCFF;
+}
+
+#navigation-menu dl dd img {
+	text-align: left;
+	vertical-align: middle;
+	border: 0px;
+	max-width:20px;
+	max-height:20px;
+}

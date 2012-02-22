@@ -1,0 +1,91 @@
+/************************************************************************
+ * current-song STYLES:
+ * #current-song:
+ *   Positions the current-song menu
+ *
+ * #current-song dl:
+ *   background: current-song area background color
+ *   width: Width of the current-song Menu
+ *
+ * #current-song dl dt:
+ *   border-bottom: White line below the Header Text in the menu
+ *   color: Header Text Color
+ *   font-size: Header Text Size
+ *
+ * #current-song dl dd:
+ *   background-color: Background colors of items in the menu
+ *   color: Menu text color
+ *   font-size: Header Text Size
+ *   border-bottom: White line below the Text in the menu
+ *
+ * #current-song dl dd a:
+ * Styling on hover
+ *
+ *
+ ************************************************************************/
+#current-song {
+	text-align:center;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	width:90%;
+}
+
+#current-song dl {
+	background: #6699CC;
+	margin: 0px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 10px;
+	width: 100%;
+}
+
+#current-song dl dt {
+	border-bottom: 1px solid white;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 4px;
+}
+
+#current-song dl dd {
+	vertical-align: middle;
+	font-size: 12px;
+	background-color: #4477AA;
+	border-bottom: 1px solid white;
+	color: white;
+	margin: 0px;
+	padding: 4px;
+}
+
+#current-song dl dd a,
+#current-song dl dd a:visited {
+	background-color: #4477AA;
+	background-repeat: no-repeat;
+	background-position: 10px 10px;
+	background-attachment: scroll;
+	color: white;
+	display: block;
+	text-decoration: none;
+	padding-top: 5px;
+	padding-left: 0px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+}
+
+#current-song dl dd a:hover {
+	background-color: #225588;
+	background-repeat: no-repeat;
+	background-position: 11px 10px;
+	background-attachment: scroll;
+	color: #99CCFF;
+}
+
+#current-song dl dd img {
+	vertical-align: middle;
+	border: 0px;
+	max-width:20px;
+	max-height:20px;
+}

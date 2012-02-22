@@ -1,0 +1,232 @@
+<{includeq file='db:sam_header.html'}>
+<{if !empty($currentSong)}>
+
+	<!-- BEGIN:CURRENTLY PLAYING -->
+	<div id="currently_playing_wrapper">
+		<div id="currently_playing">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th align="left" style="width: 170px;">
+							<{$smarty.const._MS_SAM_PLAYING_CURRENTLYPLAYING}>
+						</th>
+						<th align="center">
+						</th>
+						<th align="left">
+						</th>
+						<th align="right" style="width: 50px;">
+							<{$smarty.const._MS_SAM_PLAYING_TIME}>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center">
+							<{if $xoConfig.show_pictures && !empty($currentSong.picture)}>
+							<a href="<{$currentSong.buycd}>" target="_blank">
+								<img id="cpPictureMainSong" onload="showPicture(this, true)" width="100" height="100" src="<{$currentSong.picture}>" alt="<{$smarty.const._MS_SAM_PLAYING_BUYCD}>Buy CD!" title="<{$smarty.const._MS_SAM_PLAYING_BUYCD}>" />
+							</a>
+							<br />
+							<{/if}>
+
+							<a href="<{$currentSong.buycd}>" target="_blank">
+								<img src="<{$xoops_url}>/modules/sam/images/buy.png" alt="<{$smarty.const._MS_SAM_PLAYING_BUYTHISCDNOW}>" title="<{$smarty.const._MS_SAM_PLAYING_BUYTHISCDNOW}>" />
+							</a>
+							<a href="<{$currentSong.website}>" target="_blank">
+								<img src="<{$xoops_url}>/modules/sam/images/home.png" alt="<{$smarty.const._MS_SAM_PLAYING_ARTISTHOMEPAGE}>" title="<{$smarty.const._MS_SAM_PLAYING_ARTISTSHOMEPAGE}>" />
+							</a>
+							<a href="javascript:songinfo(<{$currentSong.ID}>, '<{$xoops_url}>', 'sam')">
+								<img src="<{$xoops_url}>/modules/sam/images/info.png" alt="<{$smarty.const._MS_SAM_PLAYING_TRACKINFORMATION}>" title="<{$smarty.const._MS_SAM_PLAYING_TRACKINFORMATION}>" />
+							</a>
+
+						</td>
+						<td colspan="2">
+							<span id="currently-playing-title"><{$currentSong.title}></span><{if $currentSong.isRequested}>&nbsp;<{$smarty.const._MS_SAM_PLAYING_REQUESTED}>&nbsp;<{/if}>
+							<{if (!empty($currentSong.artist))}><br /><{$smarty.const._MS_SAM_PLAYING_BY}>&nbsp;<span id="currently-playing-artist"><a href="<{$currentSong.website}>" target="_blank"><{$currentSong.artist}></a></span><{/if}>
+							<{if (!empty($currentSong.album))}><br /><{$smarty.const._MS_SAM_PLAYING_FROM}>&nbsp;<span id="currently-playing-artist"><a href="<{$currentSong.buycd}>" target="_blank"><{$currentSong.album}></a></span><{/if}>
+							<{if ($xoConfig.allow_requests && $currentSong.isDedication)}>
+							<!-- BEGIN:DEDICATION -->
+							 <br />
+							 <br />
+							 <{$smarty.const._MS_SAM_PLAYING_TRACKREQUESTEDBY}> <span id="dedication-name">"<{$currentSong.dedicationName}>"</span>
+								 <{if (!empty($currentSong.dedicationMessage)) }>
+									<{$smarty.const._MS_SAM_PLAYING_WITHMESSAGE}> <span id="dedication-message">"<{$currentSong.dedicationMessage}>"</span>
+								 <{/if}>
+							<!-- END:DEDICATION -->
+							<{/if}>
+						</td>
+						<td align="right">
+							<span id="currently-playing-duration"><{$currentSong.duration}></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- END:CURRENTLY PLAYING -->
+<{/if}>
+
+
+<{if (is_array($comingSongs) && count($comingSongs)>0) }>
+	<!-- BEGIN:COMING UP -->
+	<div id="coming-up_wrapper">
+		<div id="coming-up">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th colspan="1" align="left">
+							<{$smarty.const._MS_SAM_PLAYING_COMINGUP}>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<{assign var=counter value=1}>
+							<{if (count($comingSongs) > 1)}>
+							<{assign var=doCounter value=1}>
+							<{else}>
+							<{assign var=doCounter value=0}>
+							<{/if}>
+							<{foreach from=$comingSongs item=comingSong}>
+								<div>
+									<{if ($doCounter)}><span class="comingIndex"><{$counter}></span><{/if}>
+									<a href="javascript:songinfo(<{$comingSong.ID}>, '<{$xoops_url}>', 'sam')" title="<{$comingSong.artist_title}>">
+										<{$comingSong.title}>
+										<{if (!empty($comingSong.artist))}> <br /><{$smarty.const._MS_SAM_PLAYING_BY}> <{$comingSong.artist}> <{/if}>
+									</a>
+								<{if ($comingSong.isRequested)}>
+									<{$smarty.const._MS_SAM_PLAYING_REQUESTED}>
+								<{/if}>
+								</div>
+								<{assign var=counter value=$counter+1}>
+							<{/foreach}>
+							<hr style="width:100%;border:none;"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- END:COMING UP -->
+<{/if}>
+
+
+<{if (is_array($recentSongs) && count($recentSongs)>0)}>
+	<!-- BEGIN:RECENTLY PLAYED -->
+	<div id="recently_played_wrapper">
+		<div id="recently_played">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th colspan="2" align="left">
+							<{$smarty.const._MS_SAM_PLAYING_RECENTLYPLAYED}>
+						</th>
+						<th class="links" align="center">
+							<{$smarty.const._MS_SAM_PLAYING_LINKS}>
+						</th>
+						<th align="left">
+							<{$smarty.const._MS_SAM_PLAYING_ALBUM}>
+						</th>
+						<th align="right">
+							<{$smarty.const._MS_SAM_PLAYING_TIME}>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<{foreach from=$recentSongs key=key item=recentSong}>
+					<tr>
+						<td>
+							<{if ($xoConfig.show_pictures && !empty($recentSong.picture))}>
+							<a href="<{$recentSong.buycd}>" target="_blank">
+								<img class="rpPicture" id="rpPicture<{$key}>" onload="showPicture(this, <{$xoConfig.show_pictures}>)" width="60" height="60" src="<{$recentSong.picture}>" alt="<{$smarty.const._MS_SAM_PLAYING_BUYCD}>" title="<{$smarty.const._MS_SAM_PLAYING_BUYCD}>" />
+							</a>
+							<{/if}>
+						</td>
+
+						<td>
+							<{$recentSong.artist_title}>
+							<{if ($recentSong.isRequested)}>
+							<{$smarty.const._MS_SAM_PLAYING_REQUESTED}>
+							<{/if}>
+						</td>
+						<td align="center">
+							<a href="<{$recentSong.buycd}>" target="_blank">
+								<img src="<{$xoops_url}>/modules/sam/images/buy.png" alt="<{$smarty.const._MS_SAM_PLAYING_BUYTHISCDNOW}>" title="<{$smarty.const._MS_SAM_PLAYING_BUYTHISCDNOW}>" />
+							</a>
+							<a href="<{$recentSong->website}>" target="_blank">
+								<img src="<{$xoops_url}>/modules/sam/images/home.png" alt="<{$smarty.const._MS_SAM_PLAYING_ARTISTHOMEPAGE}>" title="<{$smarty.const._MS_SAM_PLAYING_ARTISTHOMEPAGE}>" />
+							</a>
+							<a href="javascript:songinfo(<{$recentSong.ID}>, '<{$xoops_url}>', 'sam')">
+								<img src="<{$xoops_url}>/modules/sam/images/info.png" alt="<{$smarty.const._MS_SAM_PLAYING_TRACKINFORMATION}>" title="<{$smarty.const._MS_SAM_PLAYING_TRACKINFORMATION}>" />
+							</a>
+						</td>
+
+						<td>
+							<{$recentSong.album}>
+						</td>
+						<td align="right">
+							<{$recentSong.duration}>
+						</td>
+					</tr>
+				<{/foreach}>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- END:RECENTLY PLAYED -->
+	<{/if}>
+<{includeq file='db:sam_footer.html'}>
+<{$smarty.const._MI_SAM_SOFTWARESPONSOR}>
+<!-- END:PAGE -->
+<{if ($xoConfig.check_interval > 0)}>
+<script type="text/javascript">
+//<![CDATA[
+	setInterval("DoCheckRefresh()", <{$xoConfig.check_interval}>);
+	function DoCheckRefresh()
+	{
+		var url = '<{$xoops_url}>/modules/sam/songcheck.js.php?songID=<{if $currentSong.ID > 0}><{$currentSong.ID}><{else}>0<{/if}>&buster=' + (new Date().getTime());
+		$.getScript(url); 
+	}
+	
+	function doSongChanged()
+	{
+		DoRefresh();
+	}
+
+	function DoRefresh()
+	{
+		document.location.href = "<{$xoops_url}>/modules/sam/playing.php?buster=<{php}>echo date('dhis').rand(1,1000);<{/php}>";
+	}
+//]]>
+</script>	
+<{/if}>
+
+<!-- JQuery to round corners some of the HTML items on the page -->
+<script type="text/javascript">
+//<![CDATA[
+// Make sure the DOM is ready
+$(document).ready(function() {
+	// Rounding of corners (Cross-browser compatible)
+	// See http://jquery.malsup.com/corner/ for different Styles.
+
+	// Rounds the page corners
+	$('#page').corner();
+	
+	// Rounds the Currently Playing Table Corners
+	$('#currently_playing').corner();
+
+	// Rounds the Coming Up Corners
+	$('#coming-up').corner();
+
+	// Rounds the Recently Played Table Corners
+	$('#recently_played').corner();
+	// Style odd and even rows in Currently Playing Table (Cross-browser compatible)
+	$('#recently_played table tbody tr:nth-child(odd)').addClass('recently_played_odd');
+	$('#recently_played table tbody tr:nth-child(even)').addClass('recently_played_even');
+
+	// Round the Dedication Corners
+	$('#dedication dl').corner('tl tr').corner();
+});
+//]]>
+</script>
