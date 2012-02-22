@@ -31,12 +31,7 @@ class SamDatabaseFactory
      */
     function SamDatabaseFactory()
     {
-    	if (!isset($GLOBALS['samModuleConfig'])||!is_array($GLOBALS['samModuleConfig'])) {
-    		$config_handler = xoops_gethandler('config');
-    		$module_handler = xoops_gethandler('module');
-    		$GLOBALS['samModule'] = $module_handler->getDirname('sam');
-    		$GLOBALS['samModuleConfig'] = $config_handler->getConfigList($GLOBALS['samModule']->getVar('mid')); 
-    	}
+
     }
 
     /**
@@ -51,7 +46,12 @@ class SamDatabaseFactory
      */
     function &getDatabaseConnection()
     {
-    	
+        
+    	$config_handler = xoops_gethandler('config');
+    	$module_handler = xoops_gethandler('module');
+    	$GLOBALS['samModule'] = $module_handler->getByDirname('sam');
+    	$GLOBALS['samModuleConfig'] = $config_handler->getConfigList($GLOBALS['samModule']->getVar('mid')); 
+    	    	
         static $instance;
         if (!isset($instance)) {
             if (file_exists($file = XOOPS_ROOT_PATH . '/modules/sam/class/database/' . $GLOBALS['samModuleConfig']['db_type'] . 'database.php')) {
@@ -86,7 +86,12 @@ class SamDatabaseFactory
      */
     function &getDatabase()
     {
-        static $database;
+        $config_handler = xoops_gethandler('config');
+    	$module_handler = xoops_gethandler('module');
+    	$GLOBALS['samModule'] = $module_handler->getByDirname('sam');
+    	$GLOBALS['samModuleConfig'] = $config_handler->getConfigList($GLOBALS['samModule']->getVar('mid')); 
+    	
+    	static $database;
         if (!isset($database)) {
             if (file_exists($file = XOOPS_ROOT_PATH . '/modules/sam/class/database/' . $GLOBALS['samModuleConfig']['db_type'] . 'database.php')) {
                 include_once $file;
